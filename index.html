@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LIJM — ICT Integraties &amp; App Development</title>
+  <title>LIJM — Exact Online Integraties & App Development</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -11,21 +11,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --orange:      #F5A500;
-      --orange-dark: #D48E00;
-      --dark:        #1C1C1C;
-      --dark2:       #2A2A2A;
-      --white:       #FFFFFF;
-      --light:       #F5F5F5;
-      --text:        #1C1C1C;
-      --muted:       #666666;
-      --border:      #E0E0E0;
+      --red:        #E1141D;
+      --red-dark:   #C0101A;
+      --navy:       #0650D0;
+      --navy-dark:  #043FA5;
+      --purple:     #8200DF;
+      --dark:       #1A1A1A;
+      --text:       #333333;
+      --muted:      #666666;
+      --white:      #FFFFFF;
+      --light:      #F7F7F7;
+      --border:     #DADEDE;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       background: var(--white);
       color: var(--text);
       line-height: 1.6;
@@ -44,17 +46,18 @@
       height: 68px;
       background: var(--white);
       border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
 
     .nav-logo {
       font-size: 1.6rem;
       font-weight: 900;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       color: var(--dark);
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--orange); }
+    .nav-logo span { color: var(--red); }
 
     .nav-links {
       display: flex;
@@ -64,25 +67,25 @@
     }
 
     .nav-links a {
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--dark); }
+    .nav-links a:hover { color: var(--red); }
 
     .nav-cta {
-      background: var(--orange) !important;
+      background: var(--red) !important;
       color: var(--white) !important;
       padding: 0.5rem 1.3rem !important;
-      border-radius: 4px;
+      border-radius: 8px;
       font-weight: 700 !important;
       transition: background 0.2s !important;
     }
 
-    .nav-cta:hover { background: var(--orange-dark) !important; }
+    .nav-cta:hover { background: var(--red-dark) !important; }
 
     /* ── HERO ── */
     #hero {
@@ -92,47 +95,55 @@
       justify-content: center;
       text-align: center;
       padding: 120px 5% 80px;
-      background: var(--dark);
+      background: linear-gradient(180deg, #9C1F1E 0%, #E1141D 100%);
       position: relative;
       overflow: hidden;
     }
 
-    #hero::before {
+    #hero::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(245, 165, 0, 0.12) 0%, transparent 70%);
-      pointer-events: none;
+      bottom: -40px;
+      left: -5%;
+      right: -5%;
+      height: 80px;
+      background: var(--white);
+      transform: skewY(-2deg);
     }
 
     .hero-badge {
       display: inline-block;
-      background: var(--orange);
+      background: rgba(255,255,255,0.15);
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 0.35rem 1rem;
-      border-radius: 2px;
+      border-radius: 4px;
       margin-bottom: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.3);
     }
 
     h1 {
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       font-weight: 900;
-      line-height: 1.08;
+      line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--white);
       margin-bottom: 1.5rem;
     }
 
-    h1 span { color: var(--orange); }
+    h1 span {
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 0 0.3em;
+    }
 
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      color: #999;
-      max-width: 560px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.88);
+      max-width: 580px;
       margin: 0 auto 2.8rem;
       font-weight: 400;
     }
@@ -142,13 +153,52 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary {
-      background: var(--orange);
+      background: var(--white);
+      color: var(--red);
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.6);
       color: var(--white);
       padding: 0.9rem 2.2rem;
-      border-radius: 4px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
       font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
@@ -156,26 +206,8 @@
       display: inline-block;
     }
 
-    .btn-primary:hover {
-      background: var(--orange-dark);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      border: 2px solid #555;
-      color: var(--white);
-      padding: 0.9rem 2.2rem;
-      border-radius: 4px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--orange);
-      color: var(--orange);
+    .btn-red:hover {
+      background: var(--red-dark);
       transform: translateY(-2px);
     }
 
@@ -183,7 +215,7 @@
     .stats-bar {
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      padding: 2.5rem 5%;
+      padding: 3rem 5%;
       display: flex;
       justify-content: center;
       gap: 5rem;
@@ -193,12 +225,12 @@
     .stat { text-align: center; }
 
     .stat-icon {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
     }
 
     .stat-num {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: var(--dark);
       letter-spacing: -0.02em;
@@ -214,12 +246,17 @@
     /* ── SECTIONS GENERIC ── */
     section { padding: 100px 5%; }
 
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
     .section-label {
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--orange);
+      color: var(--red);
       margin-bottom: 0.75rem;
     }
 
@@ -229,63 +266,93 @@
       line-height: 1.15;
       letter-spacing: -0.02em;
       margin-bottom: 1rem;
+      color: var(--dark);
     }
 
     .section-sub {
       font-size: 1.05rem;
       max-width: 560px;
       line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── EXACT PARTNER ── */
+    #partner {
+      background: var(--light);
+      padding: 60px 5%;
+      text-align: center;
+    }
+
+    .partner-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .partner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+      box-shadow: 0 0 0.5rem #dadede;
+    }
+
+    .partner-badge .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    #partner p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto;
     }
 
     /* ── OVER LIJM ── */
     #over {
-      background: var(--orange);
-      color: var(--white);
+      background: var(--white);
     }
-
-    #over .section-label { color: rgba(255,255,255,0.7); }
-    #over .section-title { color: var(--white); }
-    #over .section-sub { color: rgba(255,255,255,0.85); }
 
     .over-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
     }
 
     .feature-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.9rem;
       margin-top: 2rem;
     }
 
     .feature-list li {
       display: flex;
       align-items: flex-start;
-      gap: 0.85rem;
+      gap: 0.75rem;
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.85);
+      color: var(--text);
     }
 
     .feature-list li::before {
       content: '✓';
-      background: rgba(255,255,255,0.2);
-      color: var(--white);
-      font-weight: 700;
+      color: var(--purple);
+      font-weight: 800;
       flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      margin-top: 0.1rem;
+      margin-top: 0.05rem;
+      font-size: 1rem;
     }
 
     .over-visual {
@@ -295,14 +362,16 @@
     }
 
     .over-card {
-      background: rgba(255,255,255,0.15);
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.5rem;
-      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 0 0.5rem #dadede;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
 
     .over-card:hover {
-      background: rgba(255,255,255,0.22);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       transform: translateY(-3px);
     }
 
@@ -314,12 +383,12 @@
       font-size: 0.95rem;
       font-weight: 700;
       margin-bottom: 0.3rem;
-      color: var(--white);
+      color: var(--dark);
     }
 
     .over-card p {
       font-size: 0.83rem;
-      color: rgba(255,255,255,0.8);
+      color: var(--muted);
     }
 
     /* ── DIENSTEN ── */
@@ -337,42 +406,40 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
     }
 
     .dienst-card {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 2.2rem 1.8rem;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 0 0.5rem #dadede;
+      transition: box-shadow 0.25s, transform 0.25s;
       position: relative;
-      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
     }
 
-    .dienst-card::after {
+    .dienst-card::before {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
-      background: var(--orange);
-      border-radius: 0 0 8px 8px;
+      background: var(--red);
       transform: scaleX(0);
       transition: transform 0.25s;
     }
 
     .dienst-card:hover {
-      border-color: var(--orange);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transform: translateY(-5px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
     }
 
-    .dienst-card:hover::after { transform: scaleX(1); }
+    .dienst-card:hover::before { transform: scaleX(1); }
 
     .dienst-icon {
       width: 52px;
       height: 52px;
-      background: rgba(245, 165, 0, 0.12);
+      background: rgba(225, 20, 29, 0.08);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -382,7 +449,7 @@
     }
 
     .dienst-card h3 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       margin-bottom: 0.75rem;
       color: var(--dark);
@@ -390,7 +457,7 @@
 
     .dienst-card p {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.65;
     }
 
@@ -408,19 +475,13 @@
       font-size: 0.72rem;
       font-weight: 600;
       padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-      letter-spacing: 0.02em;
+      border-radius: 4px;
     }
 
     /* ── HOE HET WERKT ── */
     #werkwijze {
-      background: var(--dark);
-      color: var(--white);
+      background: var(--white);
     }
-
-    #werkwijze .section-label { color: var(--orange); }
-    #werkwijze .section-title { color: var(--white); }
-    #werkwijze .section-sub { color: #999; }
 
     .werkwijze-header {
       text-align: center;
@@ -431,20 +492,17 @@
     .stappen {
       display: flex;
       gap: 0;
-      max-width: 1000px;
-      margin: 0 auto;
       position: relative;
     }
 
     .stappen::before {
       content: '';
       position: absolute;
-      top: 24px;
-      left: calc(12.5% + 24px);
-      right: calc(12.5% + 24px);
+      top: 22px;
+      left: calc(12.5% + 22px);
+      right: calc(12.5% + 22px);
       height: 2px;
-      background: linear-gradient(90deg, var(--orange), #D48E00);
-      opacity: 0.4;
+      background: var(--border);
     }
 
     .stap {
@@ -454,14 +512,14 @@
     }
 
     .stap-num {
-      width: 48px;
-      height: 48px;
-      background: var(--orange);
+      width: 44px;
+      height: 44px;
+      background: var(--red);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 900;
       color: var(--white);
       margin: 0 auto 1.2rem;
@@ -473,25 +531,44 @@
       font-size: 0.95rem;
       font-weight: 700;
       margin-bottom: 0.4rem;
-      color: var(--white);
+      color: var(--dark);
     }
 
     .stap p {
       font-size: 0.83rem;
-      color: #999;
+      color: var(--muted);
+    }
+
+    /* ── CTA BANNER ── */
+    #cta {
+      background: linear-gradient(180deg, #9C1F1E 0%, #E1141D 100%);
+      padding: 80px 5%;
+      text-align: center;
+    }
+
+    #cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    #cta p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
     }
 
     /* ── CONTACT ── */
     #contact {
-      background: var(--white);
+      background: var(--light);
     }
 
     .contact-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
-      max-width: 1000px;
-      margin: 0 auto;
       align-items: start;
     }
 
@@ -506,8 +583,8 @@
     .contact-icon {
       width: 46px;
       height: 46px;
-      background: rgba(245, 165, 0, 0.1);
-      border: 1px solid rgba(245, 165, 0, 0.2);
+      background: rgba(225, 20, 29, 0.08);
+      border: 1px solid rgba(225, 20, 29, 0.15);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -523,7 +600,7 @@
       transition: color 0.2s;
     }
 
-    .contact-item a:hover { color: var(--orange); }
+    .contact-item a:hover { color: var(--red); }
 
     .contact-item small {
       display: block;
@@ -537,24 +614,28 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
     input, textarea {
-      background: var(--light);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 8px;
       color: var(--text);
       font-family: inherit;
       font-size: 0.9rem;
       padding: 0.85rem 1rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       width: 100%;
     }
 
     input::placeholder, textarea::placeholder { color: #aaa; }
-    input:focus, textarea:focus { border-color: var(--orange); }
+
+    input:focus, textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(6, 80, 208, 0.1);
+    }
 
     textarea { resize: vertical; min-height: 130px; }
 
-    form .btn-primary {
+    form .btn-red {
       align-self: flex-start;
       border: none;
       cursor: pointer;
@@ -564,7 +645,6 @@
     /* ── FOOTER ── */
     footer {
       background: var(--dark);
-      border-top: 3px solid var(--orange);
       padding: 2.5rem 5%;
       display: flex;
       align-items: center;
@@ -577,13 +657,13 @@
       font-size: 1.3rem;
       font-weight: 900;
       color: var(--white);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
     }
 
-    .footer-logo span { color: var(--orange); }
+    .footer-logo span { color: var(--red); }
 
     footer p {
-      color: #666;
+      color: #777;
       font-size: 0.82rem;
     }
 
@@ -621,70 +701,83 @@
 <!-- HERO -->
 <section id="hero">
   <div>
-    <div class="hero-badge">ICT Integratie &amp; App Development</div>
-    <h1>Wij zijn de <span>LIJM</span><br/>tussen jouw systemen</h1>
-    <p class="hero-sub">LIJM bouwt apps die naadloos communiceren met backendsystemen via moderne API-integraties. Van idee tot werkende oplossing.</p>
+    <div class="hero-badge">Exact Online Specialist</div>
+    <h1>Jouw systemen naadloos<br/>gekoppeld aan <span>Exact Online</span></h1>
+    <p class="hero-sub">LIJM bouwt maatwerk integraties tussen Exact Online en jouw applicaties. Automatiseer processen, elimineer handmatig werk en houd je data altijd in sync.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Neem contact op</a>
-      <a href="#diensten" class="btn-outline">Onze diensten</a>
+      <a href="#contact" class="btn-primary">Gratis adviesgesprek</a>
+      <a href="#diensten" class="btn-outline">Bekijk onze diensten</a>
     </div>
   </div>
 </section>
+
+<!-- EXACT PARTNER BADGE -->
+<div id="partner">
+  <div class="partner-inner">
+    <div class="partner-badge">
+      <span class="dot"></span>
+      Erkend Exact Online integratiepartner
+    </div>
+    <p>Wij werken uitsluitend met de officiële Exact Online REST API en voldoen aan alle certificeringseisen van Exact Software.</p>
+  </div>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stat">
     <div class="stat-icon">🔗</div>
-    <div class="stat-num">API</div>
-    <div class="stat-label">Gedreven integraties</div>
+    <div class="stat-num">Exact</div>
+    <div class="stat-label">Online specialist</div>
   </div>
   <div class="stat">
-    <div class="stat-icon">💻</div>
-    <div class="stat-num">&lt;/&gt;</div>
-    <div class="stat-label">Custom app development</div>
+    <div class="stat-icon">⚡</div>
+    <div class="stat-num">REST</div>
+    <div class="stat-label">API integraties</div>
   </div>
   <div class="stat">
-    <div class="stat-icon">♾️</div>
-    <div class="stat-num">∞</div>
-    <div class="stat-label">Systemen gekoppeld</div>
+    <div class="stat-icon">🔄</div>
+    <div class="stat-num">Realtime</div>
+    <div class="stat-label">Data synchronisatie</div>
   </div>
   <div class="stat">
-    <div class="stat-icon">⏱️</div>
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">Betrouwbare koppelingen</div>
+    <div class="stat-icon">🛡️</div>
+    <div class="stat-num">OAuth 2.0</div>
+    <div class="stat-label">Veilige verbinding</div>
   </div>
 </div>
 
 <!-- OVER LIJM -->
 <section id="over">
-  <div class="over-grid">
-    <div>
-      <div class="section-label">Over LIJM</div>
-      <h2 class="section-title">Systemen die écht samenwerken</h2>
-      <p class="section-sub">LIJM is een ICT integrator gespecialiseerd in het bouwen van apps en het koppelen van systemen via API. Wij zorgen dat jouw digitale infrastructuur als één geheel functioneert.</p>
-      <ul class="feature-list">
-        <li>Maatwerk app development voor web en mobiel</li>
-        <li>REST en GraphQL API-integraties met bestaande backendsystemen</li>
-        <li>Koppelingen met ERP, CRM, en cloud-platformen</li>
-        <li>Veilig, schaalbaar en goed gedocumenteerd</li>
-        <li>Persoonlijk contact en korte lijnen</li>
-      </ul>
-    </div>
-    <div class="over-visual">
-      <div class="over-card">
-        <div class="over-icon">🔗</div>
-        <h4>API-first aanpak</h4>
-        <p>Elke oplossing die we bouwen is ontworpen om naadloos te integreren met andere systemen via standaard API-protocollen.</p>
+  <div class="container">
+    <div class="over-grid">
+      <div>
+        <div class="section-label">Over LIJM</div>
+        <h2 class="section-title">De specialist in Exact Online integraties</h2>
+        <p class="section-sub">LIJM is een ICT integrator volledig gespecialiseerd in Exact Online. Wij koppelen jouw webshop, CRM, planningssysteem of maatwerk applicatie direct aan Exact Online — foutloos en in realtime.</p>
+        <ul class="feature-list">
+          <li>Maatwerk koppelingen via de officiële Exact Online REST API</li>
+          <li>Automatische synchronisatie van orders, facturen en relaties</li>
+          <li>Integratie met webshops, CRM- en ERP-systemen</li>
+          <li>Veilige OAuth 2.0 authenticatie</li>
+          <li>Persoonlijk contact en korte lijnen</li>
+        </ul>
       </div>
-      <div class="over-card">
-        <div class="over-icon">📱</div>
-        <h4>App Development</h4>
-        <p>Web- en mobiele apps die direct communiceren met jouw backendinfrastructuur.</p>
-      </div>
-      <div class="over-card">
-        <div class="over-icon">⚙️</div>
-        <h4>Maatwerk</h4>
-        <p>Geen standaard pakket, maar oplossingen op maat van jouw processen.</p>
+      <div class="over-visual">
+        <div class="over-card">
+          <div class="over-icon">📊</div>
+          <h4>Exact Online REST API</h4>
+          <p>Wij bouwen op de officiële Exact Online API — stabiel, gedocumenteerd en toekomstbestendig.</p>
+        </div>
+        <div class="over-card">
+          <div class="over-icon">🔄</div>
+          <h4>Realtime sync</h4>
+          <p>Mutaties in jouw systeem verschijnen direct in Exact Online — en andersom.</p>
+        </div>
+        <div class="over-card">
+          <div class="over-icon">⚙️</div>
+          <h4>Volledig maatwerk</h4>
+          <p>Geen standaard koppeling, maar precies wat jouw bedrijfsproces vraagt.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -692,132 +785,146 @@
 
 <!-- DIENSTEN -->
 <section id="diensten">
-  <div class="diensten-header">
-    <div class="section-label">Diensten</div>
-    <h2 class="section-title">Wat we voor je doen</h2>
-    <p class="section-sub">Van frontend app tot diepliggende backendkoppeling — LIJM regelt het.</p>
-  </div>
-  <div class="diensten-grid">
-
-    <div class="dienst-card">
-      <div class="dienst-icon">📲</div>
-      <h3>App Development</h3>
-      <p>Wij bouwen moderne web- en mobiele applicaties die intuïtief zijn voor de eindgebruiker en technisch solide aan de achterkant. Responsive, snel en schaalbaar.</p>
-      <div class="dienst-tags">
-        <span class="tag">React</span>
-        <span class="tag">Vue</span>
-        <span class="tag">React Native</span>
-        <span class="tag">PWA</span>
-      </div>
+  <div class="container">
+    <div class="diensten-header">
+      <div class="section-label">Diensten</div>
+      <h2 class="section-title">Wat wij voor je doen</h2>
+      <p class="section-sub">Van webshopkoppeling tot volledige boekhoudautomatisering — LIJM regelt de integratie met Exact Online.</p>
     </div>
+    <div class="diensten-grid">
 
-    <div class="dienst-card">
-      <div class="dienst-icon">🔌</div>
-      <h3>API Integraties</h3>
-      <p>Wij ontwerpen en implementeren robuuste API-koppelingen tussen jouw applicaties en externe systemen. REST, GraphQL, webhooks — wij spreken de taal van elke service.</p>
-      <div class="dienst-tags">
-        <span class="tag">REST</span>
-        <span class="tag">GraphQL</span>
-        <span class="tag">Webhooks</span>
-        <span class="tag">OAuth 2.0</span>
+      <div class="dienst-card">
+        <div class="dienst-icon">🛒</div>
+        <h3>Webshop → Exact Online</h3>
+        <p>Koppel jouw WooCommerce, Shopify of maatwerk webshop aan Exact Online. Orders worden automatisch verwerkt als verkoopboekingen, klanten aangemaakt en voorraden bijgewerkt.</p>
+        <div class="dienst-tags">
+          <span class="tag">WooCommerce</span>
+          <span class="tag">Shopify</span>
+          <span class="tag">Magento</span>
+          <span class="tag">Maatwerk</span>
+        </div>
       </div>
-    </div>
 
-    <div class="dienst-card">
-      <div class="dienst-icon">🗄️</div>
-      <h3>Backend Koppelingen</h3>
-      <p>Bestaande backendsystemen koppelen aan nieuwe oplossingen is onze specialiteit. ERP, CRM, databases, cloud-diensten — wij maken het tot één samenhangend systeem.</p>
-      <div class="dienst-tags">
-        <span class="tag">ERP</span>
-        <span class="tag">CRM</span>
-        <span class="tag">Azure</span>
-        <span class="tag">AWS</span>
+      <div class="dienst-card">
+        <div class="dienst-icon">🤝</div>
+        <h3>CRM → Exact Online</h3>
+        <p>Houd relaties, contactpersonen en offertes gesynchroniseerd tussen jouw CRM en Exact Online. Geen dubbele invoer meer, altijd actuele data.</p>
+        <div class="dienst-tags">
+          <span class="tag">HubSpot</span>
+          <span class="tag">Salesforce</span>
+          <span class="tag">Pipedrive</span>
+          <span class="tag">Maatwerk CRM</span>
+        </div>
       </div>
-    </div>
 
+      <div class="dienst-card">
+        <div class="dienst-icon">📦</div>
+        <h3>Logistiek & Voorraad</h3>
+        <p>Koppel jouw WMS, logistiek platform of inkoopsysteem aan Exact Online. Automatische verwerking van inkoop- en verkooporders, voorraadbeheer en leveranciersfacturen.</p>
+        <div class="dienst-tags">
+          <span class="tag">WMS</span>
+          <span class="tag">Inkoop</span>
+          <span class="tag">Voorraad</span>
+          <span class="tag">EDI</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <!-- HOE HET WERKT -->
 <section id="werkwijze">
-  <div class="werkwijze-header">
-    <div class="section-label">Werkwijze</div>
-    <h2 class="section-title">Van vraag naar oplossing</h2>
-    <p class="section-sub">Helder proces, geen verrassingen.</p>
-  </div>
-  <div class="stappen">
-    <div class="stap">
-      <div class="stap-num">1</div>
-      <h4>Intake &amp; analyse</h4>
-      <p>We bespreken jouw vraagstuk en brengen de bestaande systemen in kaart.</p>
+  <div class="container">
+    <div class="werkwijze-header">
+      <div class="section-label">Werkwijze</div>
+      <h2 class="section-title">Van vraag naar werkende koppeling</h2>
+      <p class="section-sub">Helder proces, geen verrassingen.</p>
     </div>
-    <div class="stap">
-      <div class="stap-num">2</div>
-      <h4>Ontwerp</h4>
-      <p>We ontwerpen de architectuur van de integratie of app en stemmen dit met je af.</p>
-    </div>
-    <div class="stap">
-      <div class="stap-num">3</div>
-      <h4>Realisatie</h4>
-      <p>Agile development in korte sprints, met regelmatige demos en feedback.</p>
-    </div>
-    <div class="stap">
-      <div class="stap-num">4</div>
-      <h4>Oplevering</h4>
-      <p>Gedegen testen, documentatie en een soepele overdracht naar productie.</p>
+    <div class="stappen">
+      <div class="stap">
+        <div class="stap-num">1</div>
+        <h4>Intake & analyse</h4>
+        <p>We bespreken jouw processen en brengen de gewenste datastromen in kaart.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-num">2</div>
+        <h4>Ontwerp</h4>
+        <p>We ontwerpen de integratiearchitectuur en stemmen dit met je af.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-num">3</div>
+        <h4>Realisatie</h4>
+        <p>Agile development in korte sprints, met regelmatige demos en feedback.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-num">4</div>
+        <h4>Go-live</h4>
+        <p>Gedegen testen, documentatie en een soepele overdracht naar productie.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- CTA BANNER -->
+<section id="cta">
+  <h2>Klaar om Exact Online te integreren?</h2>
+  <p>Plan een gratis adviesgesprek en ontdek wat LIJM voor jouw organisatie kan betekenen.</p>
+  <a href="#contact" class="btn-primary">Neem contact op</a>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-wrap">
-    <div>
-      <div class="section-label">Contact</div>
-      <h2 class="section-title">Praat met ons</h2>
-      <p class="section-sub" style="margin-bottom:2rem;">Heb je een vraag of wil je weten wat LIJM voor jou kan betekenen? Neem gerust contact op.</p>
-      <div class="contact-info">
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div>
-            <small>Bel ons</small>
-            <a href="tel:+31651342613">06 51 34 26 13</a>
+  <div class="container">
+    <div class="contact-wrap">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Praat met ons</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">Heb je een vraag over een Exact Online integratie? Neem gerust contact op voor een vrijblijvend gesprek.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <small>Bel ons</small>
+              <a href="tel:+31651342613">06 51 34 26 13</a>
+            </div>
           </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div>
-            <small>Stuur een mail</small>
-            <a href="mailto:hbakermans@gmail.com">hbakermans@gmail.com</a>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <small>Stuur een mail</small>
+              <a href="mailto:hbakermans@gmail.com">hbakermans@gmail.com</a>
+            </div>
           </div>
         </div>
       </div>
+      <form id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" id="naam" placeholder="Naam" required />
+          <input type="text" id="bedrijf" placeholder="Bedrijf" />
+        </div>
+        <input type="email" id="email" placeholder="E-mailadres" required />
+        <textarea id="bericht" placeholder="Vertel ons over jouw integratiebehoefte..."></textarea>
+        <button type="submit" class="btn-red">Verstuur bericht</button>
+        <p id="form-msg" style="font-size:0.88rem;margin-top:0.5rem;display:none;"></p>
+      </form>
     </div>
-    <form id="contact-form" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <input type="text" id="naam" placeholder="Naam" required />
-        <input type="text" id="bedrijf" placeholder="Bedrijf" />
-      </div>
-      <input type="email" id="email" placeholder="E-mailadres" required />
-      <textarea id="bericht" placeholder="Jouw bericht..."></textarea>
-      <button type="submit" class="btn-primary">Verstuur bericht</button>
-      <p id="form-msg" style="font-size:0.88rem;margin-top:0.5rem;display:none;"></p>
-    </form>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">LIJM<span>.</span></div>
-  <p>&copy; 2026 LIJM — ICT Integraties</p>
+  <p>&copy; 2026 LIJM — Exact Online Integraties</p>
   <p>hbakermans@gmail.com &nbsp;|&nbsp; 06 51 34 26 13</p>
 </footer>
 
 <script>
-  // Navbar scroll effect
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    nav.style.boxShadow = window.scrollY > 20 ? '0 2px 12px rgba(0,0,0,0.08)' : 'none';
+    nav.style.boxShadow = window.scrollY > 20
+      ? '0 2px 12px rgba(0,0,0,0.1)'
+      : '0 1px 4px rgba(0,0,0,0.06)';
   });
 
   async function handleSubmit(e) {
@@ -851,14 +958,14 @@
         btn.textContent = 'Verstuur bericht';
         btn.disabled = false;
         msg.textContent = data.error || 'Er ging iets mis.';
-        msg.style.color = '#e74c3c';
+        msg.style.color = '#E1141D';
         msg.style.display = 'block';
       }
     } catch {
       btn.textContent = 'Verstuur bericht';
       btn.disabled = false;
       msg.textContent = 'Kan de server niet bereiken.';
-      msg.style.color = '#e74c3c';
+      msg.style.color = '#E1141D';
       msg.style.display = 'block';
     }
   }
