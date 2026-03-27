@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIJM — ICT Integraties &amp; App Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0f1e;
+      --bg2:       #0f1628;
+      --bg3:       #141d35;
+      --accent:    #00d4ff;
+      --accent2:   #0099cc;
+      --text:      #e8f0fe;
+      --muted:     #8899b4;
+      --border:    rgba(0, 212, 255, 0.15);
+      --card-bg:   rgba(15, 22, 40, 0.8);
+      --glow:      0 0 40px rgba(0, 212, 255, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(10, 15, 30, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent2) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 212, 255, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0, 100, 180, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badge::before { content: '⬡'; font-size: 0.75rem; }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), #7b61ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(0, 212, 255, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.8rem 5%;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 0.2rem;
+    }
+
+    /* ── SECTIONS GENERIC ── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+
+    /* ── OVER LIJM ── */
+    #over {
+      background: var(--bg2);
+    }
+
+    .over-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .over-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .over-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .over-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .over-card:first-child {
+      grid-column: span 2;
+    }
+
+    .over-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .over-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .over-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── DIENSTEN ── */
+    #diensten {
+      background: var(--bg);
+    }
+
+    .diensten-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .diensten-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .dienst-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.2rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .dienst-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .dienst-card:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      transform: translateY(-6px);
+      box-shadow: var(--glow);
+    }
+
+    .dienst-card:hover::before { opacity: 1; }
+
+    .dienst-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .dienst-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .dienst-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .dienst-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+
+    .tag {
+      background: rgba(0, 212, 255, 0.07);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── HOE HET WERKT ── */
+    #werkwijze {
+      background: var(--bg2);
+    }
+
+    .werkwijze-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .stappen {
+      display: flex;
+      gap: 0;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .stappen::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(10% + 28px);
+      right: calc(10% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), #7b61ff, var(--accent));
+      opacity: 0.3;
+    }
+
+    .stap {
+      flex: 1;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .stap-num {
+      width: 56px;
+      height: 56px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0 auto 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stap h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .stap p {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-item a:hover { color: var(--accent); }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    input, textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, textarea:focus { border-color: var(--accent); }
+
+    textarea { resize: vertical; min-height: 130px; }
+
+    form .btn-primary {
+      align-self: flex-start;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .over-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .diensten-grid { grid-template-columns: 1fr; }
+      .stappen { flex-direction: column; gap: 2rem; }
+      .stappen::before { display: none; }
+      .over-visual { grid-template-columns: 1fr; }
+      .over-card:first-child { grid-column: span 1; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .stats-bar { gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">LIJM</a>
+  <ul class="nav-links">
+    <li><a href="#over">Over ons</a></li>
+    <li><a href="#diensten">Diensten</a></li>
+    <li><a href="#werkwijze">Werkwijze</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-badge">ICT Integratie &amp; App Development</div>
+    <h1>Wij zijn de <span>lijm</span><br/>tussen jouw systemen</h1>
+    <p class="hero-sub">LIJM bouwt apps die naadloos communiceren met backendsystemen via moderne API-integraties. Van idee tot werkende oplossing.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Neem contact op</a>
+      <a href="#diensten" class="btn-outline">Onze diensten</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">API</div>
+    <div class="stat-label">Gedreven integraties</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">&#60;/&#62;</div>
+    <div class="stat-label">Custom app development</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Systemen gekoppeld</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Betrouwbare koppelingen</div>
+  </div>
+</div>
+
+<!-- OVER LIJM -->
+<section id="over">
+  <div class="over-grid">
+    <div>
+      <div class="section-label">Over LIJM</div>
+      <h2 class="section-title">Systemen die écht samenwerken</h2>
+      <p class="section-sub">LIJM is een ICT integrator gespecialiseerd in het bouwen van apps en het koppelen van systemen via API. Wij zorgen dat jouw digitale infrastructuur als één geheel functioneert.</p>
+      <ul class="feature-list">
+        <li>Maatwerk app development voor web en mobiel</li>
+        <li>REST en GraphQL API-integraties met bestaande backendsystemen</li>
+        <li>Koppelingen met ERP, CRM, en cloud-platformen</li>
+        <li>Veilig, schaalbaar en goed gedocumenteerd</li>
+        <li>Persoonlijk contact en korte lijnen</li>
+      </ul>
+    </div>
+    <div class="over-visual">
+      <div class="over-card">
+        <div class="over-icon">🔗</div>
+        <h4>API-first aanpak</h4>
+        <p>Elke oplossing die we bouwen is ontworpen om naadloos te integreren met andere systemen via standaard API-protocollen.</p>
+      </div>
+      <div class="over-card">
+        <div class="over-icon">📱</div>
+        <h4>App Development</h4>
+        <p>Web- en mobiele apps die direct communiceren met jouw backendinfrastructuur.</p>
+      </div>
+      <div class="over-card">
+        <div class="over-icon">⚙️</div>
+        <h4>Maatwerk</h4>
+        <p>Geen standaard pakket, maar oplossingen op maat van jouw processen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIENSTEN -->
+<section id="diensten">
+  <div class="diensten-header">
+    <div class="section-label">Diensten</div>
+    <h2 class="section-title">Wat we voor je doen</h2>
+    <p class="section-sub">Van frontend app tot diepliggende backendkoppeling — LIJM regelt het.</p>
+  </div>
+  <div class="diensten-grid">
+
+    <div class="dienst-card">
+      <div class="dienst-icon">📲</div>
+      <h3>App Development</h3>
+      <p>Wij bouwen moderne web- en mobiele applicaties die intuïtief zijn voor de eindgebruiker en technisch solide aan de achterkant. Responsive, snel en schaalbaar.</p>
+      <div class="dienst-tags">
+        <span class="tag">React</span>
+        <span class="tag">Vue</span>
+        <span class="tag">React Native</span>
+        <span class="tag">PWA</span>
+      </div>
+    </div>
+
+    <div class="dienst-card">
+      <div class="dienst-icon">🔌</div>
+      <h3>API Integraties</h3>
+      <p>Wij ontwerpen en implementeren robuuste API-koppelingen tussen jouw applicaties en externe systemen. REST, GraphQL, webhooks — wij spreken de taal van elke service.</p>
+      <div class="dienst-tags">
+        <span class="tag">REST</span>
+        <span class="tag">GraphQL</span>
+        <span class="tag">Webhooks</span>
+        <span class="tag">OAuth 2.0</span>
+      </div>
+    </div>
+
+    <div class="dienst-card">
+      <div class="dienst-icon">🗄️</div>
+      <h3>Backend Koppelingen</h3>
+      <p>Bestaande backendsystemen koppelen aan nieuwe oplossingen is onze specialiteit. ERP, CRM, databases, cloud-diensten — wij maken het tot één samenhangend systeem.</p>
+      <div class="dienst-tags">
+        <span class="tag">ERP</span>
+        <span class="tag">CRM</span>
+        <span class="tag">Azure</span>
+        <span class="tag">AWS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOE HET WERKT -->
+<section id="werkwijze">
+  <div class="werkwijze-header">
+    <div class="section-label">Werkwijze</div>
+    <h2 class="section-title">Van vraag naar oplossing</h2>
+    <p class="section-sub">Helder proces, geen verrassingen.</p>
+  </div>
+  <div class="stappen">
+    <div class="stap">
+      <div class="stap-num">1</div>
+      <h4>Intake &amp; analyse</h4>
+      <p>We bespreken jouw vraagstuk en brengen de bestaande systemen in kaart.</p>
+    </div>
+    <div class="stap">
+      <div class="stap-num">2</div>
+      <h4>Ontwerp</h4>
+      <p>We ontwerpen de architectuur van de integratie of app en stemmen dit met je af.</p>
+    </div>
+    <div class="stap">
+      <div class="stap-num">3</div>
+      <h4>Realisatie</h4>
+      <p>Agile development in korte sprints, met regelmatige demos en feedback.</p>
+    </div>
+    <div class="stap">
+      <div class="stap-num">4</div>
+      <h4>Oplevering</h4>
+      <p>Gedegen testen, documentatie en een soepele overdracht naar productie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Praat met ons</h2>
+      <p class="section-sub" style="margin-bottom:2rem;">Heb je een vraag of wil je weten wat LIJM voor jou kan betekenen? Neem gerust contact op.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <small>Bel ons</small>
+            <a href="tel:+31651342613">06 51 34 26 13</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <small>Stuur een mail</small>
+            <a href="mailto:hbakermans@gmail.com">hbakermans@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input type="text" placeholder="Naam" required />
+        <input type="text" placeholder="Bedrijf" />
+      </div>
+      <input type="email" placeholder="E-mailadres" required />
+      <textarea placeholder="Jouw bericht..."></textarea>
+      <button type="submit" class="btn-primary">Verstuur bericht</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LIJM</div>
+  <p>&copy; 2026 LIJM — ICT Integraties</p>
+  <p>hbakermans@gmail.com &nbsp;|&nbsp; 06 51 34 26 13</p>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.background =
+      window.scrollY > 20
+        ? 'rgba(10, 15, 30, 0.95)'
+        : 'rgba(10, 15, 30, 0.75)';
+  });
+
+  // Form submit placeholder
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Verzonden ✓';
+    btn.style.background = '#00b894';
+    btn.disabled = true;
+  }
+</script>
+
+</body>
+</html>
