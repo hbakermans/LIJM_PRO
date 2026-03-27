@@ -793,14 +793,15 @@
         </div>
       </div>
     </div>
-    <form onsubmit="handleSubmit(event)">
+    <form id="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-row">
-        <input type="text" placeholder="Naam" required />
-        <input type="text" placeholder="Bedrijf" />
+        <input type="text" id="naam" placeholder="Naam" required />
+        <input type="text" id="bedrijf" placeholder="Bedrijf" />
       </div>
-      <input type="email" placeholder="E-mailadres" required />
-      <textarea placeholder="Jouw bericht..."></textarea>
+      <input type="email" id="email" placeholder="E-mailadres" required />
+      <textarea id="bericht" placeholder="Jouw bericht..."></textarea>
       <button type="submit" class="btn-primary">Verstuur bericht</button>
+      <p id="form-msg" style="font-size:0.88rem;margin-top:0.5rem;display:none;"></p>
     </form>
   </div>
 </section>
@@ -819,13 +820,47 @@
     nav.style.boxShadow = window.scrollY > 20 ? '0 2px 12px rgba(0,0,0,0.08)' : 'none';
   });
 
-  // Form submit placeholder
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button');
-    btn.textContent = 'Verzonden ✓';
-    btn.style.background = '#2ECC71';
+    const msg = document.getElementById('form-msg');
+
+    btn.textContent = 'Bezig...';
     btn.disabled = true;
+    msg.style.display = 'none';
+
+    try {
+      const res = await fetch('/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          naam:    document.getElementById('naam').value,
+          bedrijf: document.getElementById('bedrijf').value,
+          email:   document.getElementById('email').value,
+          bericht: document.getElementById('bericht').value,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        btn.textContent = 'Verzonden ✓';
+        btn.style.background = '#2ECC71';
+        e.target.reset();
+      } else {
+        btn.textContent = 'Verstuur bericht';
+        btn.disabled = false;
+        msg.textContent = data.error || 'Er ging iets mis.';
+        msg.style.color = '#e74c3c';
+        msg.style.display = 'block';
+      }
+    } catch {
+      btn.textContent = 'Verstuur bericht';
+      btn.disabled = false;
+      msg.textContent = 'Kan de server niet bereiken.';
+      msg.style.color = '#e74c3c';
+      msg.style.display = 'block';
+    }
   }
 </script>
 
