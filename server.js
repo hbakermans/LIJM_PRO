@@ -47,6 +47,12 @@ app.post('/send', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`LIJM server draait op http://localhost:${PORT}`);
-});
+// Localhost: start de server direct
+// Vercel: exporteer de app als serverless handler
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`LIJM server draait op http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

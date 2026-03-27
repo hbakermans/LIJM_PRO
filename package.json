@@ -4,7 +4,8 @@
   "description": "LIJM — ICT Integraties & App Development",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "vercel dev"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
